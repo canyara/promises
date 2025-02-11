@@ -414,7 +414,7 @@ In your `Package.swift` file, add `Promises` dependency to corresponding targets
 let package = Package(
   // ...
   dependencies: [
-    .package(url: "https://github.com/google/promises.git", from: "2.2.0"),
+    .package(url: "https://github.com/google/promises.git", from: "2.4.0"),
   ],
   // ...
 )
@@ -1024,6 +1024,12 @@ high-level patterns that would also be great to provide out of the box.
 they've been fulfilled, the promise returned from `all` is fulfilled with an
 array of all fulfilled values. If one of the given promises is rejected, then
 the returned promise is rejected with the same error.
+
+Note that `all` does not control when each contained promise task starts
+(a promise task starts when that promise is created), nor when each promise
+is resolved (this depends on the length of the task). However, it does
+guarantee that the order of promises in the output array is identical to the
+order of promises passed to it in the input array.
 
 In Swift, the `all` operator also allows passing promises of heterogeneous
 types. For this case, the returned promise will be resolved with a tuple
